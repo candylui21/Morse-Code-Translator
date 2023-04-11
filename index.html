@@ -7,9 +7,6 @@
         <title>Morse Code Translator</title>
         <link rel="stylesheet" href="./styles.css" />
         <script type="module" src="./dom.js" defer></script>
-        <script type="module" src="./englishToMorse.js" defer></script>
-        <script type="module" src="./morseToEnglish.js" defer></script>
-        <script type="module" src="./morseDictionary.js" defer></script>
     </head>
     <body>
         <header>Morse Code Translator</header>
@@ -51,82 +48,4 @@
             <div id="error-message"></div>
         </div>
     </body>
-
-    <!-- script works in HTML -->
-    <script>
-        const morseAlphabet = {
-            A: ".-",
-            B: "-...",
-            C: "-.-.",
-            D: "-..",
-            E: ".",
-            F: "..-.",
-            G: "--.",
-            H: "....",
-            I: "..",
-            J: ".---",
-            K: "-.-",
-            L: ".-..",
-            M: "--",
-            N: "-.",
-            O: "---",
-            P: ".--.",
-            Q: "--.-",
-            R: ".-.",
-            S: "...",
-            T: "-",
-            U: "..-",
-            V: "...-",
-            W: ".--",
-            X: "-..-",
-            Y: "-.--",
-            Z: "--..",
-        };
-        document.getElementById("clearBtn").addEventListener("click", () => {
-            document.getElementById("english").value = "";
-            document.getElementById("morseCode").value = "";
-        });
-
-        const englishTextBox = document.querySelector("#english");
-        const morseTextBox = document.querySelector("#morseCode");
-        const clearBtn = document.querySelector("#clearBtn");
-        const noInputError = new Error("Input cannot be empty");
-        const invalidInputError = new Error(
-            "Input may only consist of letters A-Z, a-z and single spaces"
-        );
-        const engToMorse = (input) => {
-            // split input and to uppercase
-            let split = input.toUpperCase().split("");
-            // replace all letters with morse + space or double space
-            let code = split.map((char) => {
-                return morseAlphabet[char] ? morseAlphabet[char] + " " : "  ";
-            });
-            // join string back
-            let result = code.join("");
-            // remove space from both side of string
-            return result.trim();
-        };
-        // translation when input is entered by user
-        englishTextBox.addEventListener("input", () => {
-            const englishText = englishTextBox.value.trim();
-            const morseTranslation = engToMorse(englishText);
-            morseTextBox.value = morseTranslation;
-            try {
-                engToMorseValid(englishText);
-            } catch (error) {
-                document.getElementById("error-message").innerHTML =
-                    error.message;
-            }
-        });
-        const engToMorseValid = (input) => {
-            // if no input throw an error
-            if (!input) {
-                throw noInputError;
-            }
-            // if input includes anything other than A-Z a-z or space throw new error
-            if (!/^[A-Za-z\s]*$/.test(input)) {
-                throw invalidInputError;
-            }
-        };
-    </script>
 </html>

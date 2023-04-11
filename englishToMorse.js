@@ -1,8 +1,10 @@
-import { morseAlphabet } from "./morseDictionary";
+import { morseAlphabet } from "./morseDictionary.js";
 // english to morse const
-export const noInputError = new Error("Input cannot be empty");
+export const noInputError = new Error(
+    "Start translation by typing into English or Morse Code section"
+);
 export const invalidInputError = new Error(
-    "Input may only consist of letters A-Z, a-z and single spaces"
+    "Input may only consist of letters A-Z, a-z, numbers 0-9 and single spaces"
 );
 
 // FUNCTION
@@ -26,7 +28,7 @@ export const engToMorseValid = (input) => {
         throw noInputError;
     }
     // if input includes anything other than A-Z a-z or space throw new error
-    if (!/^[A-Za-z\s]*$/.test(input)) {
+    if (!/^[A-Za-z0-9\s]*$/.test(input)) {
         throw invalidInputError;
     }
 };

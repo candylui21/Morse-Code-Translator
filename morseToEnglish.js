@@ -1,6 +1,8 @@
-import { swappedMorseAlphabet } from "./morseDictionary";
+import { swappedMorseAlphabet } from "./morseDictionary.js";
 
-export const noMorseInputError = new Error("Input cannot be empty");
+export const noMorseInputError = new Error(
+    "Start translation by typing into English or Morse Code section"
+);
 export const morseSpaceError = new Error(
     "Please enter 1 space between letters and 3 spaces between words"
 );
@@ -16,7 +18,7 @@ export const morseToEng = (input) => {
     let code = split.map((word) =>
         word
             .split(" ")
-            .map((indiChar) => [swappedMorseAlphabet[indiChar]])
+            .map((char) => [swappedMorseAlphabet[char]])
             .join("")
             .toUpperCase()
     );
@@ -35,13 +37,35 @@ export const morseToEngValid = (input) => {
     }
 
     // not a dot, dash or space
-    if (!/^[\s.-]/g.test(input)) {
-        throw invalidMorseInput;
+    for (let i = 0; i < input.length; i++) {
+        const morseChar = input[i];
+
+        // Check if input is a valid Morse code character
+        if (
+            !swappedMorseAlphabet.hasOwnProperty(morseChar) &&
+            morseChar !== " "
+        ) {
+            throw invalidMorseInput;
+        }
     }
-
     // if there is 2 spaces or if there are more than 3 spaces between input
-
-    if (input.includes("  ") || input.match(/\s{4,}/)) {
+    if (
+        input.includes(" ") &&
+        !input.match(/(?<!\s)\s{1}(?!\s)|(?<!\s)\s{3}(?!\s)/)
+    ) {
         throw morseSpaceError;
     }
+    // IF NOT USING REGEX USE BELOW
+    // console.log(input.split("   "));
+    // console.log(
+    //     input
+    //         .split("   ")
+    //         .every((n) => n.charAt(0) !== " " && n.charAt(n.length - 1) !== " ")
+    // ); maps out three space
+
+    // console.log(
+    //     input.split("   ").map((n) => {
+    //         return n.split(" ");
+    //     })
+    // ); maps out one space - same logic as three space
 };
