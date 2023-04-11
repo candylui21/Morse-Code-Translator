@@ -50,7 +50,7 @@ export const morseToEngValid = (input) => {
     }
     // if there is 2 spaces or if there are more than 3 spaces between input
     if (
-        input.includes(" ") &&
+        input.match(" ") &&
         !input.match(/(?<!\s)\s{1}(?!\s)|(?<!\s)\s{3}(?!\s)/)
     ) {
         throw morseSpaceError;

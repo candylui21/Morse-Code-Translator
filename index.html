@@ -10,40 +10,33 @@
     </head>
     <body>
         <header>Morse Code Translator</header>
-        <!-- <div class="tooltip">
-            Hover over me to view the Morse Code alphabet
-            <span class="tooltiptext"></span>
-                A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G:
-                "--.", H: "....", I: "..", J: ".---", K: "-.-", L: ".-..", M:
-                "--", N: "-.", O: "---", P: ".--.", Q: "--.-", R: ".-.", S:
-                "...", T: "-", U: "..-", V: "...-", W: ".--", X: "-..-", Y:
-                "-.--", Z: "--..";</span
-            >
-        </div> -->
-        <div class="translateContainer">
-            <div class="englishContainer" id="englishContainer">
-                <h1>English:</h1>
-                <textarea
-                    name="English"
-                    id="english"
-                    cols="40"
-                    rows="5"
-                    placeholder="Enter English Text Here"
-                ></textarea>
-            </div>
 
-            <div class="morseContainer" id="morseContainer">
-                <h1>Morse Code:</h1>
-                <textarea
-                    name="morseCode"
-                    id="morseCode"
-                    cols="40"
-                    rows="5"
-                    placeholder="Enter Morse Code Here"
-                ></textarea>
-            </div>
-            <div>
-                <button class="btn" id="clearBtn">Clear Text</button>
+        <div class="translateAndError">
+            <div class="translateContainer">
+                <div class="englishContainer" id="englishContainer">
+                    <p>English:</p>
+                    <textarea
+                        name="English"
+                        id="english"
+                        cols="40"
+                        rows="5"
+                        placeholder="Enter English Text Here"
+                    ></textarea>
+                </div>
+
+                <div class="morseContainer" id="morseContainer">
+                    <p>Morse Code:</p>
+                    <textarea
+                        name="morseCode"
+                        id="morseCode"
+                        cols="40"
+                        rows="5"
+                        placeholder="Enter Morse Code Here"
+                    ></textarea>
+                </div>
+                <div>
+                    <button class="btn" id="clearBtn">Clear Text</button>
+                </div>
             </div>
             <div id="error-message"></div>
         </div>
