@@ -74,6 +74,7 @@ body {
   position: absolute;
   text-align: center;
   color: rgba(255, 0, 0, 0.699);
+  margin: 0 10px;
 }
 
 .translateAndError {
