@@ -6,8 +6,9 @@ export const noMorseInputError = new Error(
 export const morseSpaceError = new Error(
     "Please enter 1 space between letters and 3 spaces between words"
 );
-export const invalidMorseInput = new Error(
-    "The morse code combination you have entered is not a valid combination"
+
+export const invalidMorseAlphabet = new Error(
+    "The combination you have entered is not a valid morse code alphabet"
 );
 
 // MORSE FUNCTION
@@ -35,26 +36,22 @@ export const morseToEngValid = (input) => {
     if (!input) {
         throw noMorseInputError;
     }
-
-    // not a dot, dash or space
-    for (let i = 0; i < input.length; i++) {
-        const morseChar = input[i];
-
-        // Check if input is a valid Morse code character
-        if (
-            !swappedMorseAlphabet.hasOwnProperty(morseChar) &&
-            morseChar !== " "
-        ) {
-            throw invalidMorseInput;
-        }
-    }
     // if there is 2 spaces or if there are more than 3 spaces between input
-    if (
-        input.match(" ") &&
-        !input.match(/(?<!\s)\s{1}(?!\s)|(?<!\s)\s{3}(?!\s)/)
-    ) {
+    if (/(?<! ) {2}(?! )/.test(input) || / {4,}/.test(input)) {
         throw morseSpaceError;
     }
+
+    // not in alphabet
+
+    const split = input.split(" ");
+    const filter = split.filter((x) => x != "");
+    for (let i = 0; i < filter.length; i++) {
+        // Check if input is a valid Morse code character
+        if (!swappedMorseAlphabet.hasOwnProperty(filter[i])) {
+            throw invalidMorseAlphabet;
+        }
+    }
+
     // IF NOT USING REGEX USE BELOW
     // console.log(input.split("   "));
     // console.log(

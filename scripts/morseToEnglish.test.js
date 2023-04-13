@@ -2,7 +2,7 @@ import { morseToEng, morseToEngValid } from "./morseToEnglish";
 import {
     noMorseInputError,
     morseSpaceError,
-    invalidMorseInput,
+    invalidMorseAlphabet,
 } from "./morseToEnglish";
 
 describe("Test cases for function which translates Morse Code to English", () => {
@@ -44,17 +44,29 @@ describe("Test cases for error handling Morse to English", () => {
         expect(() => {
             morseToEngValid(".-    .-");
         }).toThrowError(morseSpaceError);
+        expect(() => {
+            morseToEngValid(".- .-  .");
+        }).toThrowError(morseSpaceError);
+        expect(() => {
+            morseToEngValid(".-   .  .-");
+        }).toThrowError(morseSpaceError);
     });
 
     it("should throw error if combination is not valid morse code alphabet", () => {
         expect(() => {
+            morseToEngValid("----");
+        }).toThrowError(invalidMorseAlphabet);
+        expect(() => {
+            morseToEngValid(".---------- .");
+        }).toThrowError(invalidMorseAlphabet);
+        expect(() => {
             morseToEngValid("1");
-        }).toThrowError(invalidMorseInput);
+        }).toThrowError(invalidMorseAlphabet);
         expect(() => {
             morseToEngValid("h");
-        }).toThrowError(invalidMorseInput);
+        }).toThrowError(invalidMorseAlphabet);
         expect(() => {
-            morseToEngValid(".    /");
-        }).toThrowError(invalidMorseInput);
+            morseToEngValid("./");
+        }).toThrowError(invalidMorseAlphabet);
     });
 });
